@@ -1,0 +1,54 @@
+* {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+}
+
+  .count {
+    font-weight: bold;
+    font-size: 1.1vw;
+    color: #5c6bc0;
+  }
+
+  .figures__dynamic {
+    margin-top: 2vw;
+    width: 40vw;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .figures__static {
+    margin-top: 2vw;
+    width: 40vw;
+    display: flex;
+    justify-content: space-around;
+  }
+
+    .figure {
+      width: 10vw;
+      height: 10vw;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+      font-weight: bold;
+      font-size: 1vw;
+      color: #7986cb;
+    }
+
+    .dynamic {
+      border: 9px dashed #9fa8da;
+    }
