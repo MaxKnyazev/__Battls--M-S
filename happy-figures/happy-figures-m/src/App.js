@@ -1,32 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
+// import classes from '*.module.css';
 
 class App extends Component {
   state = {
     count: 0,
+    isFilled1: false,
+    isFilled2: false,
+    isFilled0: false,
+    classes1: 'figure dynamic',
+    classes2: 'figure dynamic',
+    classes0: 'figure dynamic',
     dynamicData: [{
       id: 0,
-      isFilled: false,
-      styles: {
-
-      }
     }, {
       id: 1,
-      isFilled: false,
-      styles: {
-        
-      }
     }, {
       id: 2,
-      isFilled: false,
-      styles: {
-        
-      }
     }],
   }
 
-  colors = ['#e91e63', '#8e24aa', '#2196f3'];
-  figures = ['0', '50%'];
+  colors = ['pink', 'purple', 'blue'];
+  figures = ['square', 'circle'];
 
   randomInteger = (min, max) => {
     // случайное число от min до (max+1)
@@ -34,23 +29,35 @@ class App extends Component {
     return Math.floor(rand);
   }
 
-  staticData = [{
-    borderRadius: this.figures[this.randomInteger(0, this.figures.length - 1)],
-    background: this.colors[this.randomInteger(0, this.colors.length - 1)]
-  }, {
-    borderRadius: this.figures[this.randomInteger(0, this.figures.length - 1)],
-    background: this.colors[this.randomInteger(0, this.colors.length - 1)]
-  }, {
-    borderRadius: this.figures[this.randomInteger(0, this.figures.length - 1)],
-    background: this.colors[this.randomInteger(0, this.colors.length - 1)]
-  }];
+  staticData = [
+    `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`,
+    `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`,
+    `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`
+  ];
 
   clickHandler = (e) => {
-    if (!this.state.dynamicData[e.target.id].isFilled) {
-      this.setState = {
-        dynamicData: this.state.dynamicData
-      }
+    if (+e.target.id === 0 && !this.state.isFilled0) {
+      this.setState({
+        isFilled0: true,
+        classes0: `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`
+      })
     }
+
+    if (+e.target.id === 1 && !this.state.isFilled1) {
+      this.setState({
+        isFilled1: true,
+        classes1: `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`
+      })
+    }
+
+    if (+e.target.id === 2 && !this.state.isFilled2) {
+      this.setState({
+        isFilled2: true,
+        classes2: `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`
+      })
+    }
+    console.log(e.target.id)
+    console.log(this.state.isFilled0)
   }
 
   render () {
@@ -59,15 +66,15 @@ class App extends Component {
         <div className="count">Count = {this.state.count}</div>
 
         <div className="figures__dynamic">
-          <div style={this.state.dynamicData[0].styles} id={this.state.dynamicData[0].id} className="figure dynamic">Click here to fill</div>
-          <div style={this.state.dynamicData[1].styles} id={this.state.dynamicData[1].id} className="figure dynamic">Click here to fill</div>
-          <div style={this.state.dynamicData[2].styles} id={this.state.dynamicData[2].id} className="figure dynamic">Click here to fill</div>
+          <div onClick={this.clickHandler} id={this.state.dynamicData[0].id} className={this.state.classes0}>Click here to fill</div>
+          <div onClick={this.clickHandler} id={this.state.dynamicData[1].id} className={this.state.classes1}>Click here to fill</div>
+          <div onClick={this.clickHandler} id={this.state.dynamicData[2].id} className={this.state.classes2}>Click here to fill</div>
         </div>
 
         <div className="figures__static">
-          <div style={this.staticData[0]} className="figure"></div>
-          <div style={this.staticData[1]} className="figure"></div>
-          <div style={this.staticData[2]} className="figure"></div>
+          <div className={this.staticData[0]}></div>
+          <div className={this.staticData[1]}></div>
+          <div className={this.staticData[2]}></div>
         </div>
       </div>
     );

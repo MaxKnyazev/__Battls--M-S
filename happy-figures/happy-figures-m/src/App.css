@@ -6,6 +6,29 @@
   box-sizing: border-box;
 }
 
+.pink {
+  background-color: #e91e63;
+  color: #e91e63;
+}
+.purple {
+  background-color: #8e24aa;
+  color: #8e24aa;
+}
+.blue {
+  background-color: #2196f3;
+  color: #2196f3;
+}
+
+.square {
+  border-radius: 0;
+}
+.circle {
+  border-radius: 50%;
+}
+.special {
+  border: 10px solid red
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -26,6 +49,9 @@
     width: 40vw;
     display: flex;
     justify-content: space-around;
+    padding-bottom: 2vw;
+
+    border-bottom: 3px dashed #9fa8da
   }
 
   .figures__static {
@@ -46,9 +72,9 @@
 
       font-weight: bold;
       font-size: 1vw;
-      color: #7986cb;
     }
 
     .dynamic {
       border: 9px dashed #9fa8da;
+      color: #7986cb;
     }
