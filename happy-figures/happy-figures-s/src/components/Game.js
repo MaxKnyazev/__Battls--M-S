@@ -10,19 +10,6 @@ const figureEtalon = [
   {id: '2', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
 ];
 
-//TODO : использовать компонент ListFigure для обоих случаев
-
-//убирает из объекта elem поле id, т.к. elem является объектом стилей и строит новый массив JSX-елементов
-// const buildListFigureEtalon = figureEtalon().map(elem => {
-//   const id = elem.id;
-//   // console.log(elem);
-//   delete elem.id;
-//   // console.log(elem);
-//   return (
-//     <span className='figure figure--etalon' key={id} style={elem}></span>
-//   )
-// });
-
 class Game extends Component {
   state = {
     count: 0,
@@ -46,9 +33,6 @@ class Game extends Component {
     console.log(id);
     console.log(figureSelection[id]);
 
-    // const idx = arr.findIndex((el) => el.id === id);
-    // const oldItem = arr[idx];
-    // const newItem = {...oldItem, [propName] : !oldItem[propName]};
     const newFigure = {
       id, 
       backgroundColor: 'red', 
@@ -57,11 +41,6 @@ class Game extends Component {
       cliked: true
     };
 
-    // return [
-    //   ...arr.slice(0, idx), 
-    //   newItem, 
-    //   ...arr.slice(idx + 1)
-    // ];
     console.log('***********figureSelection*******************');
     console.log(figureSelection);
     console.log('***********figureSelection*******************');
@@ -78,7 +57,7 @@ class Game extends Component {
     let newFigureSelection = [...figureSelection];
     newFigureSelection[id] = newFigure;
   
-console.log(newFigureSelection);
+    console.log(newFigureSelection);
 
     this.setState({
       figureSelection: newFigureSelection
@@ -99,12 +78,7 @@ console.log(newFigureSelection);
         <div className='Game__figures'>
           {
             figureSelection.map(elem => {
-              //убирает из объекта elem поле id и поле clicked, т.к. elem является объектом стилей и строит новый массив JSX-елементов
               const id = elem.id;
-              // console.log(elem);
-              // delete elem.id;
-              // delete elem.cliked;
-              // console.log(elem);
               return (
                 <span 
                   className='figure figure--selection' 
@@ -121,11 +95,7 @@ console.log(newFigureSelection);
         <div className='Game__figures'>
           {
             figureEtalon.map(elem => {
-              //убирает из объекта elem поле id, т.к. elem является объектом стилей и строит новый массив JSX-елементов
               const id = elem.id;
-              // console.log(elem);
-              // delete elem.id;
-              // console.log(elem);
               return (
                 <span 
                   className='figure figure--etalon' 
@@ -157,6 +127,23 @@ TODO : где делать проверки? в componentDidMount?
 TODO : элементы figureSelection не должны перегенерироваться при повторном клике
 т.е. если поле cliked = true
 
+const a = [
+  {id: '0', br: '0'},
+  {id: '1', br: '50%'},
+  {id: '2', br: '0'},
+];
+
+const b = [
+  {id: '0', br: '0'},
+  {id: '1', br: '0'},
+  {id: '2', br: '50%'},
+];
+
+const astr = a.map(elem => elem.br).sort().join('');
+const bstr = b.map(elem => elem.br).sort().join('');
+console.log(astr);
+console.log(bstr);
+console.log(astr === bstr);
 
  */
 
