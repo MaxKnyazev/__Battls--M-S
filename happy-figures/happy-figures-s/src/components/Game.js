@@ -30,38 +30,36 @@ class Game extends Component {
     const id = e.target.id;
     const { figureSelection } = this.state;
 
-    console.log(id);
+    // console.log(e.target);
+    // console.log(id);
     console.log(figureSelection[id]);
+    console.log(figureSelection[id].cliked);
 
-    const newFigure = {
-      id, 
-      backgroundColor: 'red', 
-      borderRadius: '0', 
-      border: 'none', 
-      cliked: true
-    };
+    if (!figureSelection[id].cliked) {
+      const newFigure = {
+        id, 
+        backgroundColor: 'red', 
+        borderRadius: '0', 
+        border: 'none', 
+        cliked: true
+      };
 
-    console.log('***********figureSelection*******************');
-    console.log(figureSelection);
-    console.log('***********figureSelection*******************');
-    console.log(figureSelection.slice(0, id));
-    console.log(newFigure);
-    console.log(figureSelection.slice(id+1));
+      console.log('***********figureSelection*******************');
+      console.log(figureSelection);
+      console.log('***********figureSelection*******************');
+      console.log(figureSelection.slice(0, id));
+      console.log(newFigure);
+      console.log(figureSelection.slice(id+1));
+    
+      let newFigureSelection = [...figureSelection];
+      newFigureSelection[id] = newFigure;
+    
+      console.log(newFigureSelection);
 
-    // let newFigureSelection = [
-    //   ...figureSelection.slice(0, id), 
-    //   newFigure, 
-    //   ...figureSelection.slice(id+1)
-    // ];
-  
-    let newFigureSelection = [...figureSelection];
-    newFigureSelection[id] = newFigure;
-  
-    console.log(newFigureSelection);
-
-    this.setState({
-      figureSelection: newFigureSelection
-    });
+      this.setState({
+        figureSelection: newFigureSelection
+      });
+    }
   }
 
   render() {
@@ -122,10 +120,12 @@ TODO : сделать генерацию фигур при кликах
 
 TODO : отследить момент, когда все фигуры будут сгенерированы и надо начинать проверку
 
-TODO : где делать проверки? в componentDidMount?
+TODO : где делать проверки? в componentDidMount? update?
 
 TODO : элементы figureSelection не должны перегенерироваться при повторном клике
 т.е. если поле cliked = true
+
+//------------------------------------------
 
 const a = [
   {id: '0', br: '0'},
@@ -144,6 +144,15 @@ const bstr = b.map(elem => elem.br).sort().join('');
 console.log(astr);
 console.log(bstr);
 console.log(astr === bstr);
+
+
+//--------------------------------------------
+
+    // let newFigureSelection = [
+    //   ...figureSelection.slice(0, id), 
+    //   newFigure, 
+    //   ...figureSelection.slice(id+1)
+    // ];
 
  */
 
