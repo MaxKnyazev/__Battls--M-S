@@ -10,13 +10,26 @@ const figureEtalon = [
   {id: '2', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
 ];
 
+const GAME_POINTS_FROM_THE_CONDITION_1 = 1;
+
+const equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow = (arrEtalon, arrSelection) => {
+  const arrEtalonStr = arrEtalon.map(elem => elem.borderRadius).sort().join('');
+  const arrSelectionStr = arrSelection.map(elem => elem.borderRadius).sort().join('');
+  console.log(arrEtalonStr);
+  console.log(arrSelectionStr);
+  // console.log(arrEtalon);
+  // console.log(arrSelection);
+  console.log(arrEtalonStr === arrSelectionStr);
+  return arrEtalonStr === arrSelectionStr
+}
+
 class Game extends Component {
   state = {
     count: 0,
     figureSelection: [
-      {id: '0', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', cliked: false},
-      {id: '1', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', cliked: false},
-      {id: '2', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', cliked: false},
+      {id: '0', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+      {id: '1', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+      {id: '2', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
     ],
     // figureEtalon: [
     //   {backgroundColor: 'transparent', borderRadius: randomArrayValue(figuresBorderRadius), border: '1px solid #673ab7'},
@@ -26,6 +39,58 @@ class Game extends Component {
 
   }
 
+
+  
+
+// componentWillReceiveProps(nextProps) {
+//   console.log("componentWillReceiveProps()");
+// }
+// componentWillMount(){
+//     console.log("componentWillMount()");
+// }
+// componentDidMount(){
+//     console.log("componentDidMount()");
+// }
+// componentWillUnmount(){
+//     console.log("componentWillUnmount()");
+// }
+// shouldComponentUpdate(){
+//     console.log("shouldComponentUpdate()");
+//     return true;
+// }
+// componentWillUpdate(){
+//     console.log("componentWillUpdate()");
+// }
+componentDidUpdate(){
+    console.log("componentDidUpdate()");
+    // console.log(this.state);
+    // console.log(this.state.figureSelection);
+    // console.log(figureEtalon);
+
+    // const allFiguresIsBuilded = this.state.figureSelection.map(elem => elem.clicked).every(elem => elem === true);
+    // console.log('figureSelection is clicked :');
+    // console.log(allFiguresIsBuilded);
+
+    // if (allFiguresIsBuilded)  {
+    // console.log(`BEGIN :------------------------>>>`);
+    
+    // //TODO : GAME_POINTS_FROM_THE_CONDITION_1
+    // //       равное количество одинаковых фигур 1-го и 2-го ряда
+    // // equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow
+
+    //   // if (equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow(figureEtalon, this.state.figureSelection)) {
+    //   //   console.log('yes!!!   +1');
+
+    //   //   this.setState(prevState => ({
+    //   //     count: prevState.count + GAME_POINTS_FROM_THE_CONDITION_1
+    //   //   }));
+    //   // }
+
+    // }
+}
+
+
+
   figureSelectionHandleClick = (e) => {
     const id = e.target.id;
     const { figureSelection } = this.state;
@@ -33,33 +98,65 @@ class Game extends Component {
     // console.log(e.target);
     // console.log(id);
     console.log(figureSelection[id]);
-    console.log(figureSelection[id].cliked);
+    // console.log(figureSelection[id].cliked);
 
-    if (!figureSelection[id].cliked) {
+    if (!figureSelection[id].clicked) {
+
       const newFigure = {
         id, 
-        backgroundColor: 'red', 
-        borderRadius: '0', 
+        backgroundColor: randomArrayValue(figuresColor()), 
+        borderRadius: randomArrayValue(figuresBorderRadius()), 
         border: 'none', 
-        cliked: true
+        clicked: true
       };
 
-      console.log('***********figureSelection*******************');
-      console.log(figureSelection);
-      console.log('***********figureSelection*******************');
-      console.log(figureSelection.slice(0, id));
-      console.log(newFigure);
-      console.log(figureSelection.slice(id+1));
+      // console.log('***********figureSelection*******************');
+      // console.log(figureSelection);
+      // console.log('***********figureSelection*******************');
+      // console.log(figureSelection.slice(0, id));
+      // console.log(newFigure);
+      // console.log(figureSelection.slice(id+1));
     
       let newFigureSelection = [...figureSelection];
       newFigureSelection[id] = newFigure;
     
+      console.log('****************************  newFigureSelection');
       console.log(newFigureSelection);
 
       this.setState({
         figureSelection: newFigureSelection
       });
+
+
+      const allFiguresIsBuilded = newFigureSelection.map(elem => elem.clicked).every(elem => elem === true);
+      console.log('figureSelection is clicked :');
+      console.log(allFiguresIsBuilded);
+
+      //если все фигуры уже построены, начинаем начислять очки...
+      if (allFiguresIsBuilded)  {
+        console.log(`BEGIN :------------------------>>>`);
+    
+      //TODO : GAME_POINTS_FROM_THE_CONDITION_1 = равное количество одинаковых фигур 1-го и 2-го ряда
+      //       equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow
+      //       +1 очко
+      if (equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow(figureEtalon, newFigureSelection)) {
+        console.log('equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow --> +1');
+        this.setState(prevState => ({
+          count: prevState.count + GAME_POINTS_FROM_THE_CONDITION_1
+        }));
+      }
+
     }
+
+      
+
+      // console.log('****************************this.state');
+      // console.log(this.state);
+      }
+
+    console.log('****************************this.state');
+    console.log(this.state);
+
   }
 
   render() {
