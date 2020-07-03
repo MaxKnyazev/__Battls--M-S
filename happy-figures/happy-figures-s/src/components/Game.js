@@ -1,41 +1,101 @@
 import React, {Component} from 'react';
 import './Game.css';
-import {randomArrayValue} from './utils';
+import {randomArrayValue, log} from './utils';
 
 const figuresBorderRadius = () => ['0', '50%'];
 const figuresColor = () => ['#E91E63', '#FFEB3B', '#FF5722'];
+// const figureEtalon = [
+//   {id: '0', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
+//   {id: '1', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
+//   {id: '2', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
+// ];
+
+//************* ТЕСТОВЫЙ МАССИВ */
 const figureEtalon = [
-  {id: '0', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
-  {id: '1', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
-  {id: '2', backgroundColor: randomArrayValue(figuresColor()), borderRadius: randomArrayValue(figuresBorderRadius()), border: 'none'},
+  {id: '0', backgroundColor: '#FFEB3B', borderRadius: '0', border: 'none'},
+  {id: '1', backgroundColor: '#E91E63', borderRadius: '50%', border: 'none'},
+  {id: '2', backgroundColor: '#FF5722', borderRadius: '0', border: 'none'},
 ];
 
-const GAME_POINTS_FROM_THE_CONDITION_1 = 1;
+const EQUAL_COUNTS_OF_IDENTICAL_FIGURES_POINTS = 1;
+const EQUAL_COUNTS_OF_IDENTICAL_COLORS_POINTS = 2;
+const EQUAL_COUNTS_OF_IDENTICAL_FIGURES_ALL_ELEMENTS_POINTS = 3;
+const EQUAL_COUNTS_OF_IDENTICAL_COLORS_ALL_ELEMENTS_POINTS = 4;
+const EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_POINTS = 5;
+const EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS = 10;
 
-const equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow = (arrEtalon, arrSelection) => {
-  const arrEtalonStr = arrEtalon.map(elem => elem.borderRadius).sort().join('');
-  const arrSelectionStr = arrSelection.map(elem => elem.borderRadius).sort().join('');
-  console.log(arrEtalonStr);
-  console.log(arrSelectionStr);
-  // console.log(arrEtalon);
-  // console.log(arrSelection);
-  console.log(arrEtalonStr === arrSelectionStr);
-  return arrEtalonStr === arrSelectionStr
+//sort() --> every position of element is important = importantPosition
+
+const equalCountsOfIdenticalFigures = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.borderRadius).sort().join('');
+  const selectionResult = arrSelection.map(elem => elem.borderRadius).sort().join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
 }
+
+const equalCountsOfIdenticalColors = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.backgroundColor).sort().join('');
+  const selectionResult = arrSelection.map(elem => elem.backgroundColor).sort().join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
+}
+
+const equalCountsOfIdenticalFiguresAllElem = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.borderRadius).join('');
+  const selectionResult = arrSelection.map(elem => elem.borderRadius).join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
+}
+
+const equalCountsOfIdenticalColorsAllElem = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.backgroundColor).join('');
+  const selectionResult = arrSelection.map(elem => elem.backgroundColor).join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
+}
+
+const equalCountsOfIdenticalFiguresAndColors = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.borderRadius + elem.backgroundColor).sort().join('');
+  const selectionResult = arrSelection.map(elem => elem.borderRadius + elem.backgroundColor).sort().join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
+}
+
+const equalCountsOfIdenticalFiguresAndColorsAllElem = (arrEtalon, arrSelection) => {
+  const etalonResult = arrEtalon.map(elem => elem.borderRadius + elem.backgroundColor).join('');
+  const selectionResult = arrSelection.map(elem => elem.borderRadius + elem.backgroundColor).join('');
+
+  log(etalonResult, selectionResult, etalonResult === selectionResult);
+  // log(arrEtalon, arrSelection);
+  return etalonResult === selectionResult
+}
+
 
 class Game extends Component {
   state = {
     count: 0,
+    // figureSelection: [
+    //   {id: '0', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+    //   {id: '1', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+    //   {id: '2', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+    // ],
+
+    //************* ТЕСТОВЫЙ МАССИВ */
     figureSelection: [
-      {id: '0', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
-      {id: '1', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
+      {id: '0', backgroundColor: '#FFEB3B', borderRadius: '0', border: 'none', clicked: true},
+      {id: '1', backgroundColor: '#E91E63', borderRadius: '50%', border: 'none', clicked: true},
       {id: '2', backgroundColor: 'transparent', borderRadius: '0', border: '1px solid #673ab7', clicked: false},
     ],
-    // figureEtalon: [
-    //   {backgroundColor: 'transparent', borderRadius: randomArrayValue(figuresBorderRadius), border: '1px solid #673ab7'},
-    //   {backgroundColor: 'transparent', borderRadius: randomArrayValue(figuresBorderRadius), border: '1px solid #673ab7'},
-    //   {backgroundColor: 'transparent', borderRadius: randomArrayValue(figuresBorderRadius), border: '1px solid #673ab7'},
-    // ],
 
   }
 
@@ -97,15 +157,24 @@ componentDidUpdate(){
 
     // console.log(e.target);
     // console.log(id);
-    console.log(figureSelection[id]);
+    log('******************* figureSelection[id]', figureSelection[id]);
     // console.log(figureSelection[id].cliked);
 
     if (!figureSelection[id].clicked) {
 
+      // const newFigure = {
+      //   id, 
+      //   backgroundColor: randomArrayValue(figuresColor()), 
+      //   borderRadius: randomArrayValue(figuresBorderRadius()), 
+      //   border: 'none', 
+      //   clicked: true
+      // };
+
+      //************* ТЕСТОВЫЙ ОБЪЕКТ */
       const newFigure = {
         id, 
-        backgroundColor: randomArrayValue(figuresColor()), 
-        borderRadius: randomArrayValue(figuresBorderRadius()), 
+        backgroundColor: '#FF5722', 
+        borderRadius: '0', 
         border: 'none', 
         clicked: true
       };
@@ -120,8 +189,7 @@ componentDidUpdate(){
       let newFigureSelection = [...figureSelection];
       newFigureSelection[id] = newFigure;
     
-      console.log('****************************  newFigureSelection');
-      console.log(newFigureSelection);
+      log('****************************  newFigureSelection', newFigureSelection);
 
       this.setState({
         figureSelection: newFigureSelection
@@ -134,17 +202,80 @@ componentDidUpdate(){
 
       //если все фигуры уже построены, начинаем начислять очки...
       if (allFiguresIsBuilded)  {
-        console.log(`BEGIN :------------------------>>>`);
+        log(`The beginning of the calculations :------------------------>>>`);
     
-      //TODO : GAME_POINTS_FROM_THE_CONDITION_1 = равное количество одинаковых фигур 1-го и 2-го ряда
-      //       equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow
-      //       +1 очко
-      if (equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow(figureEtalon, newFigureSelection)) {
-        console.log('equalCountsOfIdenticalFiguresOfThe1stAnd2ndRow --> +1');
+      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_POINTS = равное количество одинаковых фигур 1-го и 2-го ряда
+      // equalCountsOfIdenticalFigures
+      // +1 очко
+      if (equalCountsOfIdenticalFigures(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalFigures : равное количество одинаковых фигур 1-го и 2-го ряда --> +1');
         this.setState(prevState => ({
-          count: prevState.count + GAME_POINTS_FROM_THE_CONDITION_1
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_POINTS
         }));
+      } else {
+        log('----------- НЕравное количество одинаковых фигур 1-го и 2-го ряда')
       }
+      // EQUAL_COUNTS_OF_IDENTICAL_COLORS_POINTS = равное количество одинаковых цветов 1-го и 2-го ряда
+      // equalCountsOfIdenticalFigures
+      // +2 очка
+      if (equalCountsOfIdenticalColors(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalColors : равное количество одинаковых цветов 1-го и 2-го ряда --> +2');
+        this.setState(prevState => ({
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_COLORS_POINTS
+        }));
+      } else {
+        log('----------- НЕравное количество одинаковых цветов 1-го и 2-го ряда')
+      }
+      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_ALL_ELEMENTS_POINTS = поэлементное совпадение фигур 1-го и 2-го ряда
+      // equalCountsOfIdenticalFiguresAllElem
+      // +3 очка
+      if (equalCountsOfIdenticalFiguresAllElem(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalFiguresAllElem : поэлементное совпадение фигур 1-го и 2-го ряда --> +3');
+        this.setState(prevState => ({
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_ALL_ELEMENTS_POINTS
+        }));
+      } else {
+        log('----------- НЕпоэлементное совпадение фигур 1-го и 2-го ряда')
+      }
+      // EQUAL_COUNTS_OF_IDENTICAL_COLORS_ALL_ELEMENTS_POINTS = поэлементное совпадение цветов 1-го и 2-го ряда
+      // equalCountsOfIdenticalFiguresAllElem
+      // +4 очка
+      if (equalCountsOfIdenticalColorsAllElem(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalColorsAllElem : поэлементное совпадение цветов 1-го и 2-го ряда --> +4');
+        this.setState(prevState => ({
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_COLORS_ALL_ELEMENTS_POINTS
+        }));
+      } else {
+        log('----------- НЕпоэлементное совпадение цветов 1-го и 2-го ряда')
+      }
+      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_POINTS = равное количество одинаковых фигур и цветов 1-го и 2-го ряда
+      // equalCountsOfIdenticalFiguresAndColors
+      // +5 очков
+      if (equalCountsOfIdenticalFiguresAndColors(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalFiguresAndColors : равное количество одинаковых фигур и цветов 1-го и 2-го ряда --> +5');
+        this.setState(prevState => ({
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_POINTS
+        }));
+      } else {
+        log('----------- НЕравное количество одинаковых фигур и цветов 1-го и 2-го ряда')
+      }
+      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS = поэлементное совпадение фигур и цветов 1-го и 2-го ряда
+      // equalCountsOfIdenticalFiguresAndColorsAllElem
+      // +10 очков
+      if (equalCountsOfIdenticalFiguresAndColorsAllElem(figureEtalon, newFigureSelection)) {
+        log('equalCountsOfIdenticalFiguresAndColorsAllElem : поэлементное совпадение фигур и цветов 1-го и 2-го ряда --> +10');
+        this.setState(prevState => ({
+          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS
+        }));
+      } else {
+        log('----------- НЕпоэлементное совпадение фигур и цветов 1-го и 2-го ряда')
+      }
+
+
+
+
+
+
 
     }
 
@@ -213,14 +344,14 @@ export default Game;
 /***
  *
  * 
-TODO : сделать генерацию фигур при кликах
++ TODO : сделать генерацию фигур при кликах
 
-TODO : отследить момент, когда все фигуры будут сгенерированы и надо начинать проверку
++ TODO : отследить момент, когда все фигуры будут сгенерированы и надо начинать проверку
 
-TODO : где делать проверки? в componentDidMount? update?
++ TODO : где делать проверки? в componentDidMount? update?
 
-TODO : элементы figureSelection не должны перегенерироваться при повторном клике
-т.е. если поле cliked = true
++ TODO : элементы figureSelection не должны перегенерироваться при повторном клике
+         т.е. если поле cliked = true
 
 //------------------------------------------
 
@@ -250,6 +381,18 @@ console.log(astr === bstr);
     //   newFigure, 
     //   ...figureSelection.slice(id+1)
     // ];
+
+
+
+//--------------------------------------------
+
+1.	+ Равное количество одинаковых фигур 1го и 2го ряда =          +1 очко
+2.	+ Равное количество одинаковых цветов 1го и 2го ряда =         +2 очка
+3.	+ Совпали фигуры 1го и 2го ряда поэлементно =                  +3 очка
+4.	+ Совпали цвета 1го и 2го ряда фигур поэлементно =             +4 очка
+5.	+ Равное количество одинаковых фигур и цветов 1го и 2го ряда = +5 очков
+6.	Совпали фигуры и цвета 1го и 2го ряда поэлементно =         +10 очков
+
 
  */
 
