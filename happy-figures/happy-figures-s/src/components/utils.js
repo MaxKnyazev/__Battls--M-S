@@ -10,3 +10,10 @@ export const randomArrayValue = (arr) => {
   rand = Math.floor(rand);
   return arr[rand];
 }
+
+export const log = (...args) => {
+  // выводит в консоль аргументы
+  args.map(elem => {
+    console.log(elem);
+  });
+}
