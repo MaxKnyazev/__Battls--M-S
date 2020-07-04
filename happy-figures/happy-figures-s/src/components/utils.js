@@ -13,7 +13,5 @@ export const randomArrayValue = (arr) => {
 
 export const log = (...args) => {
   // выводит в консоль аргументы
-  args.map(elem => {
-    console.log(elem);
-  });
+  args.map(elem => console.log(elem));
 }

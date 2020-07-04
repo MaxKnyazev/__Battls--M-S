@@ -108,9 +108,9 @@ class Game extends Component {
 // componentWillMount(){
 //     console.log("componentWillMount()");
 // }
-// componentDidMount(){
-//     console.log("componentDidMount()");
-// }
+componentDidMount(){
+    console.log("componentDidMount()");
+}
 // componentWillUnmount(){
 //     console.log("componentWillUnmount()");
 // }
@@ -300,6 +300,15 @@ componentDidUpdate(){
           <span className='titleCount'>Count = </span>
           <span className='count'>{count}</span>
         </div>
+
+        <section className="Points">
+          <span className="Points__count">+1</span>
+          <span className="Points__count">+2</span>
+          <span className="Points__count">+3</span>
+          <span className="Points__count">+4</span>
+          <span className="Points__count">+5</span>
+          <span className="Points__count">+10</span>
+        </section>
 
         <div className='Game__figures'>
           {

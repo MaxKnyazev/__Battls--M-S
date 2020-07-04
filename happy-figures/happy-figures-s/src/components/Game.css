@@ -18,6 +18,31 @@
   color: violet;
 }
 
+.Points {
+  height: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Points__count {
+  margin: 0 1vmin;
+    border: 1px solid rgb(131, 84, 212);;
+    width: calc(12px + 3vmin);
+    height: calc(12px + 3vmin);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(131, 84, 212);;
+    font-size: calc(7px + 1vmin);    
+
+}
+
+/* background-color: darksalmon;
+    border: none;
+    color: darkmagenta; */
+
 .Game__figures {
   width: 80vw;
   display: flex;
@@ -30,7 +55,7 @@
   width: 20vmin;
   height: 20vmin;
   background-color: transparent;
-  border: 1px solid #673ab7;
+  border: 1px solid rgb(131, 84, 212);;
   margin: 0 3vmin;
 }
 
