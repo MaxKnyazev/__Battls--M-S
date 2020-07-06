@@ -56,14 +56,50 @@ class App extends Component {
         classes2: `figure ${this.figures[this.randomInteger(0, this.figures.length - 1)]} ${this.colors[this.randomInteger(0, this.colors.length - 1)]}`
       })
     }
+
     console.log(e.target.id)
-    console.log(this.state.isFilled0)
+    console.log('isFilled0 ' + this.state.isFilled0)
+    console.log('isFilled1 ' + this.state.isFilled1)
+    console.log('isFilled2 ' + this.state.isFilled2)
+  }
+
+  checkEnd = () => this.state.isFilled0 && this.state.isFilled1 && this.state.isFilled2;
+
+  countScore () {
+    let score = 1;
+    // let staticSquares = [
+    //   this.staticData[0].split(' '),
+    //   this.staticData[1].split(' '),
+    //   this.staticData[2].split(' '),
+    // ]
+    // let dynamicSquares = [
+    //   this.state.classes0.split(' '),
+    //   this.state.classes1.split(' '),
+    //   this.state.classes2.split(' '),
+    // ]
+    // if (staticSquares[0][1] === dynamicSquares[0][1] && staticSquares[1][1] === dynamicSquares[1][1] && staticSquares[1][1] === dynamicSquares[0][1]) {
+    //   score += 2;
+    // }
+
+    this.setState({
+      count: score,
+    })
+    // console.log(staticSquares);
+    // console.log(dynamicSquares);
+  }
+
+  componentDidUpdate () {
+    if (this.checkEnd()) {
+      this.countScore()
+      console.log('Finished')
+      console.log(this.state)
+    }
   }
 
   render () {
     return (
       <div className="App">
-        <div className="count">Count = {this.state.count}</div>
+        <div className="count">Score = {this.state.count}</div>
 
         <div className="figures__dynamic">
           <div onClick={this.clickHandler} id={this.state.dynamicData[0].id} className={this.state.classes0}>Click here to fill</div>

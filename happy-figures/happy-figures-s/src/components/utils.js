@@ -13,7 +13,11 @@ export const randomArrayValue = (arr) => {
 
 export const log = (...args) => {
   // выводит в консоль аргументы
+<<<<<<< HEAD
   args.map(elem => {
     console.log(elem);
   });
+=======
+  args.map(elem => console.log(elem));
+>>>>>>> master
 }
