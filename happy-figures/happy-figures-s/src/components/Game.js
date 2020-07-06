@@ -42,7 +42,6 @@ const equalCountsOfIdenticalColors = (arrEtalon, arrSelection) => {
   log(etalonResult, selectionResult, etalonResult === selectionResult);
   // log(arrEtalon, arrSelection);
   return etalonResult === selectionResult
-<<<<<<< HEAD
 }
 
 const equalCountsOfIdenticalFiguresAllElem = (arrEtalon, arrSelection) => {
@@ -63,28 +62,6 @@ const equalCountsOfIdenticalColorsAllElem = (arrEtalon, arrSelection) => {
   return etalonResult === selectionResult
 }
 
-=======
-}
-
-const equalCountsOfIdenticalFiguresAllElem = (arrEtalon, arrSelection) => {
-  const etalonResult = arrEtalon.map(elem => elem.borderRadius).join('');
-  const selectionResult = arrSelection.map(elem => elem.borderRadius).join('');
-
-  log(etalonResult, selectionResult, etalonResult === selectionResult);
-  // log(arrEtalon, arrSelection);
-  return etalonResult === selectionResult
-}
-
-const equalCountsOfIdenticalColorsAllElem = (arrEtalon, arrSelection) => {
-  const etalonResult = arrEtalon.map(elem => elem.backgroundColor).join('');
-  const selectionResult = arrSelection.map(elem => elem.backgroundColor).join('');
-
-  log(etalonResult, selectionResult, etalonResult === selectionResult);
-  // log(arrEtalon, arrSelection);
-  return etalonResult === selectionResult
-}
-
->>>>>>> master
 const equalCountsOfIdenticalFiguresAndColors = (arrEtalon, arrSelection) => {
   const etalonResult = arrEtalon.map(elem => elem.borderRadius + elem.backgroundColor).sort().join('');
   const selectionResult = arrSelection.map(elem => elem.borderRadius + elem.backgroundColor).sort().join('');
@@ -232,7 +209,6 @@ componentDidUpdate(){
       // +1 очко
       if (equalCountsOfIdenticalFigures(figureEtalon, newFigureSelection)) {
         log('equalCountsOfIdenticalFigures : равное количество одинаковых фигур 1-го и 2-го ряда --> +1');
-<<<<<<< HEAD
         this.setState(prevState => ({
           count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_POINTS
         }));
@@ -292,67 +268,6 @@ componentDidUpdate(){
           count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS
         }));
       } else {
-=======
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_POINTS
-        }));
-      } else {
-        log('----------- НЕравное количество одинаковых фигур 1-го и 2-го ряда')
-      }
-      // EQUAL_COUNTS_OF_IDENTICAL_COLORS_POINTS = равное количество одинаковых цветов 1-го и 2-го ряда
-      // equalCountsOfIdenticalFigures
-      // +2 очка
-      if (equalCountsOfIdenticalColors(figureEtalon, newFigureSelection)) {
-        log('equalCountsOfIdenticalColors : равное количество одинаковых цветов 1-го и 2-го ряда --> +2');
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_COLORS_POINTS
-        }));
-      } else {
-        log('----------- НЕравное количество одинаковых цветов 1-го и 2-го ряда')
-      }
-      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_ALL_ELEMENTS_POINTS = поэлементное совпадение фигур 1-го и 2-го ряда
-      // equalCountsOfIdenticalFiguresAllElem
-      // +3 очка
-      if (equalCountsOfIdenticalFiguresAllElem(figureEtalon, newFigureSelection)) {
-        log('equalCountsOfIdenticalFiguresAllElem : поэлементное совпадение фигур 1-го и 2-го ряда --> +3');
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_ALL_ELEMENTS_POINTS
-        }));
-      } else {
-        log('----------- НЕпоэлементное совпадение фигур 1-го и 2-го ряда')
-      }
-      // EQUAL_COUNTS_OF_IDENTICAL_COLORS_ALL_ELEMENTS_POINTS = поэлементное совпадение цветов 1-го и 2-го ряда
-      // equalCountsOfIdenticalFiguresAllElem
-      // +4 очка
-      if (equalCountsOfIdenticalColorsAllElem(figureEtalon, newFigureSelection)) {
-        log('equalCountsOfIdenticalColorsAllElem : поэлементное совпадение цветов 1-го и 2-го ряда --> +4');
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_COLORS_ALL_ELEMENTS_POINTS
-        }));
-      } else {
-        log('----------- НЕпоэлементное совпадение цветов 1-го и 2-го ряда')
-      }
-      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_POINTS = равное количество одинаковых фигур и цветов 1-го и 2-го ряда
-      // equalCountsOfIdenticalFiguresAndColors
-      // +5 очков
-      if (equalCountsOfIdenticalFiguresAndColors(figureEtalon, newFigureSelection)) {
-        log('equalCountsOfIdenticalFiguresAndColors : равное количество одинаковых фигур и цветов 1-го и 2-го ряда --> +5');
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_POINTS
-        }));
-      } else {
-        log('----------- НЕравное количество одинаковых фигур и цветов 1-го и 2-го ряда')
-      }
-      // EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS = поэлементное совпадение фигур и цветов 1-го и 2-го ряда
-      // equalCountsOfIdenticalFiguresAndColorsAllElem
-      // +10 очков
-      if (equalCountsOfIdenticalFiguresAndColorsAllElem(figureEtalon, newFigureSelection)) {
-        log('equalCountsOfIdenticalFiguresAndColorsAllElem : поэлементное совпадение фигур и цветов 1-го и 2-го ряда --> +10');
-        this.setState(prevState => ({
-          count: prevState.count + EQUAL_COUNTS_OF_IDENTICAL_FIGURES_AND_COLORS_ALL_ELEMENTS_POINTS
-        }));
-      } else {
->>>>>>> master
         log('----------- НЕпоэлементное совпадение фигур и цветов 1-го и 2-го ряда')
       }
 
