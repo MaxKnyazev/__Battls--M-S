@@ -23,6 +23,8 @@ class App extends Component {
   colors = ['pink', 'purple', 'blue'];
   figures = ['square', 'circle'];
 
+  isFinished = false;
+
   randomInteger = (min, max) => {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);
@@ -66,33 +68,80 @@ class App extends Component {
   checkEnd = () => this.state.isFilled0 && this.state.isFilled1 && this.state.isFilled2;
 
   countScore () {
-    let score = 1;
-    // let staticSquares = [
-    //   this.staticData[0].split(' '),
-    //   this.staticData[1].split(' '),
-    //   this.staticData[2].split(' '),
-    // ]
-    // let dynamicSquares = [
-    //   this.state.classes0.split(' '),
-    //   this.state.classes1.split(' '),
-    //   this.state.classes2.split(' '),
-    // ]
-    // if (staticSquares[0][1] === dynamicSquares[0][1] && staticSquares[1][1] === dynamicSquares[1][1] && staticSquares[1][1] === dynamicSquares[0][1]) {
-    //   score += 2;
-    // }
+    let score = 0;
+
+    let staticFigures = [
+      this.staticData[0].split(' ')[1],
+      this.staticData[1].split(' ')[1],
+      this.staticData[2].split(' ')[1],
+    ]
+    let dynamicFigures = [
+      this.state.classes0.split(' ')[1],
+      this.state.classes1.split(' ')[1],
+      this.state.classes2.split(' ')[1],
+    ]
+
+    let staticColors = [
+      this.staticData[0].split(' ')[2],
+      this.staticData[1].split(' ')[2],
+      this.staticData[2].split(' ')[2],
+    ]
+    let dynamicColors = [
+      this.state.classes0.split(' ')[2],
+      this.state.classes1.split(' ')[2],
+      this.state.classes2.split(' ')[2],
+    ]
+
+    if (staticFigures.join('') === dynamicFigures.join('')) {
+      score += 3;
+      console.log('Third')
+    }
+
+    if (staticColors.join('') === dynamicColors.join('')) {
+      score += 4;
+      console.log('Fourth')
+    }
+
+    if ((staticFigures.join('') === dynamicFigures.join('')) && (staticColors.join('') === dynamicColors.join(''))) {
+      score += 10;
+      console.log('Sixth')
+    }
+
+    if (staticFigures.sort().join('') === dynamicFigures.sort().join('')) {
+      score += 1;
+      console.log('First')
+    }
+
+    if (staticColors.sort().join('') === dynamicColors.sort().join('')) {
+      score += 2;
+      console.log('Second')
+    }
+
+    if ((staticFigures.sort().join('') === dynamicFigures.sort().join('')) && (staticColors.sort().join('') === dynamicColors.sort().join(''))) {
+      score += 5;
+      console.log('Fifth')
+    }
 
     this.setState({
       count: score,
-    })
-    // console.log(staticSquares);
-    // console.log(dynamicSquares);
+    })    
+    console.log('DynamicFigures', dynamicFigures.join(''));
+    console.log('SortedDynamicFigures', dynamicFigures.sort().join(''));
+    console.log('StaticSquares', staticFigures);
+    console.log('StaticColors', staticColors);
+
   }
 
   componentDidUpdate () {
-    if (this.checkEnd()) {
-      this.countScore()
-      console.log('Finished')
-      console.log(this.state)
+    if (!this.isFinished) {
+      console.log('Is all filled: ', this.state.isFilled0 && this.state.isFilled1 && this.state.isFilled2);
+
+      if (this.checkEnd()) {
+        this.countScore()
+        console.log('Finished')
+        console.log(this.state)
+        this.isFinished = true;
+      }
     }
   }
 
